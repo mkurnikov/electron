@@ -80,6 +80,10 @@ const appPath = parseOption('app-path', null);
 const guestInstanceId = parseOption('guest-instance-id', null, value => parseInt(value));
 const openerId = parseOption('opener-id', null, value => parseInt(value));
 
+if (process.platform === 'win32') {
+  require('@electron/internal/renderer/win32-queryendsession-setup.ts')(process);
+}
+
 // The webContents preload script is loaded after the session preload scripts.
 if (preloadScript) {
   preloadScripts.push(preloadScript);
